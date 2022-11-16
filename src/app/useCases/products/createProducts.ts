@@ -4,7 +4,19 @@ import { Product } from '../../models/Product';
 
 export async function createProducts(request: Request, response: Response) {
   try {
-    console.log(request.body);
+    const imagePath = request.file?.filename;
+    const { name, description, price, category, ingredients } = request.body;
+
+    const product = await Product.create({
+      name,
+      description,
+      imagePath,
+      price: Number(price),
+      category,
+      ingredients: JSON.parse(ingredients),
+    });
+
+    response.status(201).json(product);
   } catch {
     response.sendStatus(500);
   }

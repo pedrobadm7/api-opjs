@@ -16,7 +16,7 @@ const upload = multer({
       callback(null, path.resolve(__dirname, '..', 'uploads'));
     },
     filename(request, file, callback) {
-      callback(null, `${Date.now()}-${file.originalname}.png`);
+      callback(null, `${Date.now()}-${file.originalname}`);
     },
   }),
 });
